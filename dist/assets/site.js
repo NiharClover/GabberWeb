@@ -17,6 +17,21 @@ nav?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () =
   menuButton?.setAttribute('aria-expanded', 'false');
 }));
 
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 820) {
+    nav?.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+  }
+}, { passive: true });
+
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && nav?.classList.contains('open')) {
+    nav.classList.remove('open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.focus();
+  }
+});
+
 const observer = 'IntersectionObserver' in window
   ? new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
